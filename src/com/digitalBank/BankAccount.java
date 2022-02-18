@@ -1,19 +1,34 @@
 package com.digitalBank;
 
-class BankAccount implements IBankAccount {
-	private static int BRANCH_SEQUENTIAL = 0;
-	private static int ACCOUNT_SEQUENTIAL = 0;
-	
+abstract class BankAccount implements IBankAccount {
+	private static int DEFAULS_BRANCH = 1;
+	private static int ACCOUNT_SEQUENTIAL = 1;	
 	protected AccountHolder holder;	
-	private int branch;
-	private int account;
-	private double balance;
+	protected int branch;
+	protected int account;
+	protected double balance;
 	
 	public BankAccount(AccountHolder holder) {
 		this.holder = holder;
-		this.branch = BRANCH_SEQUENTIAL++;
+		this.branch = DEFAULS_BRANCH;
 		this.account = ACCOUNT_SEQUENTIAL++;
 	}
+	
+	public String getHolderName() {		
+		return this.holder.getName();
+	}
+	
+	public double getBranch() {		
+		return this.branch;
+	}
+	
+	public double getAccount() {		
+		return this.account;
+	}
+
+	public double getBalance() {		
+		return this.balance;
+	}	
 	
 	public void deposit(double amount) {
 		this.balance += amount;	
@@ -26,17 +41,5 @@ class BankAccount implements IBankAccount {
 	public void transfer(double amount, BankAccount destinationAccount) {
 		this.withdraw(amount);
 		destinationAccount.deposit(amount);		
-	}
-
-	public double getBalance() {		
-		return this.balance;
-	}
-
-	public void printStatement() {
-		System.out.println("*** Bank Account Statement ***");
-		System.out.println(String.format("Holder: %s", this.holder.getName()));
-		System.out.println(String.format("Branch: %d", this.branch));
-		System.out.println(String.format("Account: %d", this.account));
-		System.out.println(String.format("Balance: %.2f", this.balance));		
-	}
+	}	
 }
