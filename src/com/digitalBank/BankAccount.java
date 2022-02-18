@@ -1,6 +1,9 @@
 package com.digitalBank;
 
 class BankAccount implements IBankAccount {
+	private static int BRANCH_SEQUENTIAL = 0;
+	private static int ACCOUNT_SEQUENTIAL = 0;
+	
 	protected AccountHolder holder;	
 	private int branch;
 	private int account;
@@ -8,6 +11,8 @@ class BankAccount implements IBankAccount {
 	
 	public BankAccount(AccountHolder holder) {
 		this.holder = holder;
+		this.branch = BRANCH_SEQUENTIAL++;
+		this.account = ACCOUNT_SEQUENTIAL++;
 	}
 	
 	public void deposit(double amount) {
