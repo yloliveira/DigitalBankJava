@@ -31,15 +31,22 @@ abstract class BankAccount implements IBankAccount {
 	}	
 	
 	public void deposit(double amount) {
-		this.balance += amount;	
-	}
-
-	public void withdraw(double amount) {
+		this.balance += amount;
+	}	
+	
+	public void withdraw(double amount) throws InsufficientBalanceException {	
+		this.checkAvailableBalance(amount);
 		this.balance -= amount;		
 	}
 
-	public void transfer(double amount, BankAccount destinationAccount) {
+	public void transfer(double amount, BankAccount destinationAccount) throws InsufficientBalanceException {
 		this.withdraw(amount);
 		destinationAccount.deposit(amount);		
 	}	
+	
+	private void checkAvailableBalance(double amount) throws InsufficientBalanceException {			
+		if(amount > this.balance) {
+			throw new InsufficientBalanceException("Insifficient Balance");
+		}
+	}
 }
