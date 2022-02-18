@@ -2,7 +2,7 @@ package com.digitalBank;
 
 public class SavingsBankAccount extends BankAccount {
 	public SavingsBankAccount(AccountHolder holder) {
-		super(holder); 
+		super(holder);
 	}
 
 	public void printStatement() {
